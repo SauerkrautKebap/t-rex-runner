@@ -133,7 +133,7 @@
      */
     Runner.defaultDimensions = {
         WIDTH: DEFAULT_WIDTH,
-        HEIGHT: 150
+        HEIGHT: 500
     };
 
 
@@ -467,9 +467,9 @@
                     'from { width:' + Trex.config.WIDTH + 'px }' +
                     'to { width: ' + this.dimensions.WIDTH + 'px }' +
                     '}';
-                
-                // create a style sheet to put the keyframe rule in 
-                // and then place the style sheet in the html head    
+
+                // create a style sheet to put the keyframe rule in
+                // and then place the style sheet in the html head
                 var sheet = document.createElement('style');
                 sheet.innerHTML = keyframes;
                 document.head.appendChild(sheet);
@@ -679,17 +679,23 @@
                         if (window.errorPageController) {
                             errorPageController.trackEasterEgg();
                         }
+                        console.log(1);
+
                     }
-                    //  Play sound effect and jump on starting the game for the first time.
-                    if (!this.tRex.jumping && !this.tRex.ducking) {
+                    //  Play sound effect and jump on starting the game for the first time. !this.tRex.jumping &&
+                    if (!this.tRex.ducking) {
                         this.playSound(this.soundFx.BUTTON_PRESS);
                         this.tRex.startJump(this.currentSpeed);
+                        console.log(2);
+
                     }
                 }
 
                 if (this.crashed && e.type == Runner.events.TOUCHSTART &&
                     e.currentTarget == this.containerEl) {
                     this.restart();
+                    console.log(3);
+
                 }
             }
 
@@ -717,7 +723,7 @@
                 e.type == Runner.events.MOUSEDOWN;
 
             if (this.isRunning() && isjumpKey) {
-                this.tRex.endJump();
+                //this.tRex.endJump();
             } else if (Runner.keycodes.DUCK[keyCode]) {
                 this.tRex.speedDrop = false;
                 this.tRex.setDuck(false);
@@ -1433,7 +1439,7 @@
             type: 'CACTUS_SMALL',
             width: 17,
             height: 35,
-            yPos: 105,
+            yPos: 455,
             multipleSpeed: 4,
             minGap: 120,
             minSpeed: 0,
@@ -1447,7 +1453,7 @@
             type: 'CACTUS_LARGE',
             width: 25,
             height: 50,
-            yPos: 90,
+            yPos: 440,
             multipleSpeed: 7,
             minGap: 120,
             minSpeed: 0,
@@ -1461,7 +1467,7 @@
             type: 'PTERODACTYL',
             width: 46,
             height: 40,
-            yPos: [100, 75, 50], // Variable height.
+            yPos: [450, 425, 400], // Variable height.
             yPosMobile: [100, 50], // Variable height mobile.
             multipleSpeed: 999,
             minSpeed: 8.5,
@@ -1749,14 +1755,16 @@
          * @param {number} speed
          */
         startJump: function (speed) {
-            if (!this.jumping) {
-                this.update(0, Trex.status.JUMPING);
-                // Tweak the jump velocity based on the speed.
-                this.jumpVelocity = this.config.INIITAL_JUMP_VELOCITY - (speed / 10);
-                this.jumping = true;
-                this.reachedMinHeight = false;
-                this.speedDrop = false;
-            }
+            //if (!this.jumping) {
+            this.update(0, Trex.status.JUMPING);
+            // Tweak the jump velocity based on the speed.
+            this.jumpVelocity = this.config.INIITAL_JUMP_VELOCITY - (speed / 10);
+            this.jumping = true;
+            this.reachedMinHeight = false;
+            this.speedDrop = false;
+            console.log(4);
+
+            //}
         },
 
         /**
@@ -2390,7 +2398,7 @@
     HorizonLine.dimensions = {
         WIDTH: 600,
         HEIGHT: 12,
-        YPOS: 127
+        YPOS: 500 - (150 - 127)
     };
 
 
